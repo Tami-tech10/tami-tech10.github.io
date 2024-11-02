@@ -48,6 +48,24 @@ body {font-family: Verdana, sans-serif; margin: 0; padding: 0; background-color:
     margin-top: 5%;
 }
 
+.play-button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    background-color: #ff4081;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+}
+.play-button:hover {
+    background-color: #e91e63;
+}
+
 /* Dots indicators */
 .dot {
     height: 15px;
@@ -139,6 +157,19 @@ body {font-family: Verdana, sans-serif; margin: 0; padding: 0; background-color:
 
 <div class="slideshow-space"></div>
 
+
+<!-- Background audio with an ID for targeting -->
+<audio id="backgroundAudio" loop hidden>
+    <source src="bday.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+
+<!-- Button to play the audio -->
+<button class="play-button" onclick="playAudio()">Play Background Music</button>
+
+
+
 <div class="slideshow-container">
 
     <div class="mySlides fade">
@@ -178,6 +209,7 @@ body {font-family: Verdana, sans-serif; margin: 0; padding: 0; background-color:
     <span class="dot"></span> 
 </div>
 
+
 <script>
 let slideIndex = 0;
 showSlides();
@@ -198,6 +230,16 @@ function showSlides() {
     dots[slideIndex-1].className += " active";
     setTimeout(showSlides, 5000); // Change image every 5 seconds
 }
+
+function playAudio() {
+    const audio = document.getElementById("backgroundAudio");
+    audio.play().then(() => {
+        document.querySelector(".play-button").style.display = "none";
+    }).catch((error) => {
+        console.error("Audio autoplay failed:", error);
+    });
+}
+
 </script>
 
 </body>
